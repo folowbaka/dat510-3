@@ -9,11 +9,15 @@ public class Block {
 
     private ObservableList<Transaction> transactions;
     private BlockHeader blockHeader;
+    private MerkleTree merkleTree;
+
 
     public Block(ObservableList<Transaction> transactions)
     {
         this.transactions=transactions;
-        this.blockHeader=new BlockHeader();
+        this.merkleTree=new MerkleTree(this.transactions);
+        this.merkleTree.merkle_tree();
+        this.blockHeader=new BlockHeader(this.merkleTree.getRoot());
     }
 
     public BlockHeader getBlockHeader() {
@@ -22,5 +26,20 @@ public class Block {
 
     public void setBlockHeader(BlockHeader blockHeader) {
         this.blockHeader = blockHeader;
+    }
+
+    public ObservableList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ObservableList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+    public MerkleTree getMerkleTree() {
+        return merkleTree;
+    }
+
+    public void setMerkleTree(MerkleTree merkleTree) {
+        this.merkleTree = merkleTree;
     }
 }

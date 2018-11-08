@@ -1,6 +1,9 @@
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 
 public class Hash {
 
@@ -86,6 +89,35 @@ public class Hash {
         return null;
     }
 
+     public static byte[] serializeToByte(Object object)
+    {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+
+            out = new ObjectOutputStream(bos);
+            out.writeObject(object);
+            out.flush();
+            byte[] byteBlockHeader = bos.toByteArray();
+            return byteBlockHeader;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+
+            try
+            {
+                bos.close();
+            } catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 
 

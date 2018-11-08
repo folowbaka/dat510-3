@@ -42,14 +42,20 @@
                         </AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" prefHeight="50.0" prefWidth="140.0" text="untitled" GridPane.rowIndex="1">
+                  <TitledPane animated="false" prefHeight="50.0" prefWidth="140.0" text="Prev Hash Block" GridPane.rowIndex="1">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutY="4.0" prefHeight="18.0" prefWidth="138.0" />
+                           </children></AnchorPane>
                     </content>
                   </TitledPane>
-                  <TitledPane animated="false" prefHeight="50.0" text="untitled" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TitledPane animated="false" prefHeight="50.0" text="MerkleRoot" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutY="3.0" prefHeight="18.0" prefWidth="136.0" />
+                           </children></AnchorPane>
                     </content>
                   </TitledPane>
                </children>

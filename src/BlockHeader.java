@@ -7,10 +7,12 @@ public class BlockHeader implements Serializable {
     private String timestamp;
     private String hashValue;
     private String prevBlockHashValue;
-
-    public BlockHeader()
+    private String merkleRoot;
+    public BlockHeader(String merkleRoot)
     {
         this.timestamp=new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        this.merkleRoot=merkleRoot;
+
 
     }
     public String getTimestamp() {
@@ -29,34 +31,19 @@ public class BlockHeader implements Serializable {
         this.hashValue = hasValue;
     }
 
-    public byte[] serialize()
-    {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out = null;
-        try {
-
-            out = new ObjectOutputStream(bos);
-            out.writeObject(this);
-            out.flush();
-            byte[] byteBlockHeader = bos.toByteArray();
-            return byteBlockHeader;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-
-            try
-            {
-                bos.close();
-            } catch (IOException ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-        return null;
+    public String getPrevBlockHashValue() {
+        return prevBlockHashValue;
     }
 
+    public void setPrevBlockHashValue(String prevBlockHashValue) {
+        this.prevBlockHashValue = prevBlockHashValue;
+    }
+
+    public String getMerkleRoot() {
+        return merkleRoot;
+    }
+
+    public void setMerkleRoot(String merkleRoot) {
+        this.merkleRoot = merkleRoot;
+    }
 }
