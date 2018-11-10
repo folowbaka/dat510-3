@@ -24,7 +24,7 @@ public class Main extends Application {
         VBox fistBlock=FXMLLoader.load(getClass().getResource("block.fxml"));
         ((HBox)((ScrollPane)(((BorderPane)root).getCenter())).getContent()).getChildren().add(fistBlock);
         controller.initApplication();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Assignment 3");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
