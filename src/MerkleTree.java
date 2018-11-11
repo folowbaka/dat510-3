@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Source : http://java-lang-programming.com/en/articles/29
+ */
 public class MerkleTree implements Serializable {
     // transaction List
     ObservableList<Transaction> txList;
@@ -28,6 +31,7 @@ public class MerkleTree implements Serializable {
         List<String> tempTxList = new ArrayList<String>();
 
         for (int i = 0; i < this.txList.size(); i++) {
+            // Serialize each Transactions
             tempTxList.add(new String(Hash.serializeToByte(this.txList.get(i)),2));
         }
 

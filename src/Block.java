@@ -11,12 +11,19 @@ public class Block {
     private BlockHeader blockHeader;
     private MerkleTree merkleTree;
 
-
+    /**
+     *
+     * @param transactions
+     */
     public Block(ObservableList<Transaction> transactions)
     {
+        //Associate the created transactions to this block
         this.transactions=transactions;
+        //Create the Merkle Tree with these transactions
         this.merkleTree=new MerkleTree(this.transactions);
+        //produce the representating hash
         this.merkleTree.merkle_tree();
+        //Create the Block header with Merkle Tree Hash
         this.blockHeader=new BlockHeader(this.merkleTree.getRoot());
     }
 

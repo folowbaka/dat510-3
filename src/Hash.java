@@ -12,6 +12,9 @@ public class Hash {
     public static final int BLOCK_SIZE=16;
     public static final String CIPHER_ALGO="AES";
 
+    /**
+     * Get the AES Cipher instance
+     */
     public Hash()
     {
         try {
@@ -21,6 +24,13 @@ public class Hash {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param textToHash
+     * @return
+     * Method which hash a message
+     */
     public byte[] hash(String textToHash)
     {
 
@@ -29,6 +39,7 @@ public class Hash {
             byte[] textByte = null;
             textByte = textToHash.getBytes("UTF-8");
             int paddingLength=textByte.length%BLOCK_SIZE;
+            //Add the needed blocks for the message that its length is a multiple of 16 (bytes)
             if(paddingLength!=0)
             {
                 paddingByte=bitPadding(paddingLength);
@@ -41,6 +52,7 @@ public class Hash {
             int numberBlocks=textByteLength/BLOCK_SIZE;
             int numBlock=0;
             byte[] hash=SECRET_KEY.getBytes("UTF-8");
+            //Compress each block
             for(int i=0;i<numberBlocks;i++)
             {
                 byte[] blockToCompress=new byte[BLOCK_SIZE];
@@ -56,6 +68,13 @@ public class Hash {
         }
         return null;
     }
+
+    /**
+     *
+     * @param nByte
+     * @return
+     * Padding method which add nByte-1 bytes filled by zeros and a byte filled with the nByte number
+     */
     public byte[] bitPadding(int nByte)
     {
         if(nByte<=0)
@@ -68,6 +87,14 @@ public class Hash {
         paddingByte[nByte-1]=Byte.parseByte(Integer.toBinaryString(nByte), 2);
         return paddingByte;
     }
+
+    /**
+     *
+     * @param blockToCompress
+     * @param key
+     * @return
+     * Compress a block of 16 Bytes with the AES Cipher
+     */
     public byte[] compression(byte[] blockToCompress,byte[] key)
     {
         try
@@ -89,6 +116,12 @@ public class Hash {
         return null;
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     * Serialize an object to hash it
+     */
      public static byte[] serializeToByte(Object object)
     {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

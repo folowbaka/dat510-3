@@ -34,19 +34,35 @@ public class Controller {
     private ArrayList<Block> blocks=new ArrayList<Block>();
     private int numberOfBlock;
 
+    /**
+     * Method triggered by clicking on "Add Transaction"
+     */
     public void addTransaction()
     {
         String transaction=transactionTF.getText();
+        //Add the transaction to the current list
         this.currentTransactions.add(new Transaction(transaction));
+        //Clear the textField
         transactionTF.clear();
 
 
     }
+
+    /**
+     * Method triggered by clicking on "Create Block"
+     */
     public void createBlock()
     {
+        //Create a new Block
         Block currentBlock=new Block(currentTransactions);
         if(numberOfBlock>0)
+            //Add the previous Block hash To the new Block
             currentBlock.getBlockHeader().setPrevBlockHashValue(blocks.get(numberOfBlock-1).getBlockHeader().getHashValue());
+        //Hash the Block Header
+        byte[] blockHeaderByte=Hash.serializeToByte(currentBlock.getBlockHeader());
+        byte[] headerHash=hash.hash(new String(blockHeaderByte,2));
+        currentBlock.getBlockHeader().setHashValue(new String(headerHash,2));
+        //Fill the Block Header representation
         fillBlockHeader(currentBlock);
         this.blocks.add(currentBlock);
         numberOfBlock++;
@@ -60,6 +76,11 @@ public class Controller {
         {
 
         }
+        System.out.println(currentBlock.getBlockHeader().getTimestamp());
+        System.out.println(currentBlock.getBlockHeader().getHashValue());
+        System.out.println(currentBlock.getBlockHeader().getPrevBlockHashValue());
+        System.out.println(currentBlock.getBlockHeader().getMerkleRoot());
+
 
 
 
@@ -77,14 +98,17 @@ public class Controller {
         ((TableColumn)this.currentTransactionList.getColumns().get(0)).setCellValueFactory(new PropertyValueFactory<Transaction,String>("name"));
         this.currentTransactionList.setItems(this.currentTransactions);
     }
+
+    /**
+     *
+     * @param block
+     * Fill the block header representation with the block property
+     */
     public void fillBlockHeader(Block block)
     {
         GridPane blockHeader=(GridPane)((TitledPane)((VBox)this.blockLayout.getChildren().get(numberOfBlock)).getChildren().get(0)).getContent();
         Label timestamp=(Label)((AnchorPane)((TitledPane)blockHeader.getChildren().get(0)).getContent()).getChildren().get(0);
         timestamp.setText(block.getBlockHeader().getTimestamp());
-        byte[] blockHeaderByte=Hash.serializeToByte(block.getBlockHeader());
-        byte[] headerHash=hash.hash(new String(blockHeaderByte,2));
-        block.getBlockHeader().setHashValue(new String(headerHash,2));
         Label hashValue=(Label)((AnchorPane)((TitledPane)blockHeader.getChildren().get(1)).getContent()).getChildren().get(0);
         hashValue.setText(block.getBlockHeader().getHashValue());
         Label merkleRoot=(Label)((AnchorPane)((TitledPane)blockHeader.getChildren().get(3)).getContent()).getChildren().get(0);
