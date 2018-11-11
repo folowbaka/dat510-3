@@ -1,8 +1,10 @@
 # DAT510 Assignment Three
 
 A simple cryptology Java project with an JavaFx interface which implement a simplified Blockchain.
+
 It was made with Intellij IDEA.
-It uses an adaption of the following Merkle Tree implementation : http://java-lang-programming.com/en/articles/29
+
+It uses an adaptation of the following Merkle Tree implementation : http://java-lang-programming.com/en/articles/29
 
 # Requirements
 Need Java 9 or higher to be run because of JavaFx.
